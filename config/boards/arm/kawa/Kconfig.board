@@ -1,0 +1,8 @@
+# Kawa board configuration
+
+# Copyright (c) 2020 The ZMK Contributors
+# SPDX-License-Identifier: MIT
+
+config BOARD_KAWA
+	bool "Kawa"
+	depends on SOC_NRF52840_QIAA
