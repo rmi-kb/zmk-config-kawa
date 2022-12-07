@@ -6,78 +6,61 @@
 
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/rgb.h>
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/outputs.h>
-#include <dt-bindings/zmk/rgb.h>
-#include <dt-bindings/zmk/ext_power.h>
 
 / {
-	conditional_layers {
-		compatible = "zmk,conditional-layers";
-		
-		tri_layer {
-			if-layers = <1 2>;
-			then-layer = <3>;
-		};
-	};
-	
-	keymap {
-		compatible = "zmk,keymap";
+    conditional_layers {
+        compatible = "zmk,conditional-layers";
 
-		typing {
-// -----------------------------------------------------------------------------------------
-//   | ESC   | 1     | 2     | 3     | 4     | 5     | 6     | 7     | 8     | 9     | 0     | -     | =     | \     | DEL   |
-//   | TAB   | Q     | W     | E     | R     | T     | Y     | U     | I     | O     | P     | [     | ]     | BSPC          |
-//   | CTRL  | A     | S     | D     | F     | G     | H     | J     | K     | L     | ;     | '     |         ENTER         |
-//   | SHIFT | Z     | X     | C     | V     | B     | N     | M     | ,     | .     | /     |         SHIFT        | MO(1)  |
-//           | GUI   | ALT   |                 SPACE                                 | ALT   | MO(2)   |
+        tri_layer {
+            if-layers = <1 2>;
+            then-layer = <3>;
+        };
+    };
 
-			bindings = <
-    &kp ESC          &kp NUM_1        &kp NUM_2     &kp NUM_3     &kp NUM_4     &kp NUM_5        &kp NUM_6        &kp NUM_7        &kp NUM_8        &kp NUM_9        &kp NUM_0        &kp MINUS        &kp EQL          &kp BSLH         &kp DEL
-    &kp TAB          &kp Q            &kp W         &kp E         &kp R         &kp T            &kp Y            &kp U            &kp I            &kp O            &kp P            &kp LBKT         &kp RBKT         &kp BSPC
-    &kp LCTRL        &kp A            &kp S         &kp D         &kp F         &kp G            &kp H            &kp J            &kp K            &kp L            &kp SCLN         &kp QUOT                          &kp ENTER
-    &kp LSHFT        &kp Z            &kp X         &kp C         &kp V         &kp B            &kp N            &kp M            &kp CMMA         &kp DOT          &kp FSLH         &kp RSHFT        &mo 1
-	                 &kp LGUI         &kp LALT                                                   &kp SPACE                                                           &kp RALT         &mo 2
-			>;
-		};
+    keymap {
+        compatible = "zmk,keymap";
 
-		misc {
-// -----------------------------------------------------------------------------------------
-//   | GRAVE | F1    | F2    | F3    | F4    | F5    | F6    | F7    | F8    | F9    | F10   | F11   | F12   | INS    | TRANS  |
-//   | BT_CLR|PROF 0 |PROF 1 |PROF 2 |PROF 3 |PROF 4 | TRANS | TRANS | PRTSCR| SCROLL| PAUSE | UP    | TRANS | TRANS           |
-//   | CAPS  | VOL-  | VOL+  | MUTE  | TRANS | TRANS | *     | /     | HOME  | PGUP  | LEFT  | RIGHT |    TRANS                |
-//   | TRANS | TRANS | TRANS | TRANS | TRANS | TRANS | +     | -     | END   | PGDN  | DOWN  |         TRANS          | TRANS  |
-//           | TRANS | TRANS |                        TRANS                          | TRANS | MO(3) | 
+        typing {
+            // -----------------------------------------------------------------------------------------
+            //   | ESC   | 1     | 2     | 3     | 4     | 5     | 6     | 7     | 8     | 9     | 0     | -     | =     | \     | DEL   |
+            //   | TAB   | Q     | W     | E     | R     | T     | Y     | U     | I     | O     | P     | [     | ]     | BSPC          |
+            //   | CTRL  | A     | S     | D     | F     | G     | H     | J     | K     | L     | ;     | '     |         ENTER         |
+            //   | SHIFT | Z     | X     | C     | V     | B     | N     | M     | ,     | .     | /     |         SHIFT        | MO(1)  |
+            //           | GUI   | ALT   |                 SPACE                                 | ALT   | MO(2)   |
 
-			bindings = <
-    &kp GRAVE        &kp F1           &kp F2           &kp F3          &kp F4          &kp F5        &kp F6           &kp F7           &kp F8           &kp F9           &kp F10          &kp F11       &kp F12       &kp INS          &trans
-    &trans           &trans           &trans           &trans          &trans          &trans        &trans           &trans           &kp PSCRN        &kp SLCK         &kp PAUSE_BREAK  &kp UP        &trans        &trans
-    &kp CAPS         &kp C_VOL_DN     &kp C_VOL_UP     &kp C_MUTE      &trans          &trans        &kp KP_MULTIPLY  &kp KP_DIVIDE    &kp HOME         &kp PG_UP        &kp LEFT         &kp RIGHT                   &trans
-    &trans           &trans           &trans           &trans          &trans          &trans        &kp KP_PLUS      &kp KP_SUBTRACT  &kp END          &kp PG_DN        &kp DOWN         &trans        &trans
-    &trans           &trans           &trans                                                         &trans                                                              &trans           &trans
-			>;
-		};
+            bindings = <
+ &kp ESC  &kp N1  &kp N2  &kp N3  &kp N4  &kp N5  &kp N6  &kp N7  &kp N8  &kp N9  &kp N0  &kp MINUS  &kp EQUAL  &kp BSLH  &kp DEL  &kp TAB   &kp Q   &kp W   &kp E   &kp R   &kp T   &kp Y   &kp U   &kp I   &kp O   &kp P  &kp LBKT  &kp RBKT  &kp BSPC  &kp LCTRL   &kp A   &kp S   &kp D   &kp F   &kp G   &kp H   &kp J   &kp K   &kp L  &kp SEMI  &kp SINGLE_QUOTE  &kp ENTER  &kp LSHFT   &kp Z   &kp X   &kp C   &kp V   &kp B   &kp N   &kp M  &kp COMMA  &kp DOT  &kp FSLH  &kp RSHFT   &mo 1  &kp LGUI  &kp LALT  &kp SPACE  &kp RALT   &mo 2
+            >;
+        };
 
-		blank {
-// Just so you have access to layer 3
-			bindings = <
-	&trans          &trans            &trans           &trans          &trans          &trans        &trans          &trans            &trans           &trans           &trans           &trans        &trans        &trans           &trans
-	&trans          &trans            &trans           &trans          &trans          &trans        &trans          &trans            &trans           &trans           &trans           &trans        &trans        &trans
-	&trans          &trans            &trans           &trans          &trans          &trans        &trans          &trans            &trans           &trans           &trans           &trans                      &trans           
-	&trans          &trans            &trans           &trans          &trans          &trans        &trans          &trans            &trans           &trans           &trans           &trans        &trans
-	                &trans            &trans                                                         &trans                                                              &trans           &trans
-			>;
-		};
+        misc {
+            // -----------------------------------------------------------------------------------------
+            //   | GRAVE | F1    | F2    | F3    | F4    | F5    | F6    | F7    | F8    | F9    | F10   | F11   | F12   | INS    | TRANS  |
+            //   | BT_CLR|PROF 0 |PROF 1 |PROF 2 |PROF 3 |PROF 4 | TRANS | TRANS | PRTSCR| SCROLL| PAUSE | UP    | TRANS | TRANS           |
+            //   | CAPS  | VOL-  | VOL+  | MUTE  | TRANS | TRANS | *     | /     | HOME  | PGUP  | LEFT  | RIGHT |    TRANS                |
+            //   | TRANS | TRANS | TRANS | TRANS | TRANS | TRANS | +     | -     | END   | PGDN  | DOWN  |         TRANS          | TRANS  |
+            //           | TRANS | TRANS |                        TRANS                          | TRANS | MO(3) | 
 
-		lighting {
-			bindings = <
-	&rgb_ug RGB_TOG &rgb_ug RGB_EFR    &rgb_ug RGB_EFF  &rgb_ug RGB_HUD &rgb_ug RGB_HUI &trans        &trans          &trans            &trans           &trans           &trans           &rgb_ug RGB_BRD &rgb_ug RGB_BRI &trans       &bootloader
-	&trans          &trans             &trans           &rgb_ug RGB_SAD &rgb_ug RGB_SAI &trans        &trans          &trans            &trans           &trans           &trans           &rgb_ug RGB_SPD &rgb_ug RGB_SPI &trans
-	&bt BT_CLR      &bt BT_SEL 0       &bt BT_SEL 1     &bt BT_SEL 2    &bt BT_SEL 3    &bt BT_SEL 4  &trans          &trans            &trans           &trans           &trans           &trans                      &trans           
-	&trans          &trans             &trans           &trans          &trans          &trans        &trans          &trans            &trans           &trans           &trans           &trans        &trans           
-		        &trans             &trans                                                         &trans                                                              &trans           &trans
-			>;
-		};
+            bindings = <
+ &kp GRAVE  &kp F1  &kp F2  &kp F3  &kp F4  &kp F5  &kp F6  &kp F7  &kp F8  &kp F9  &kp F10  &kp F11  &kp F12  &kp INS  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &kp PSCRN  &kp SLCK  &kp PAUSE_BREAK  &kp UP  &trans  &trans  &kp CAPS  &kp C_VOL_DN  &kp C_VOL_UP  &kp C_MUTE  &trans  &trans  &kp KP_MULTIPLY  &kp KP_DIVIDE  &kp HOME  &kp PG_UP  &kp LEFT  &kp RIGHT  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &kp KP_PLUS  &kp KP_SUBTRACT  &kp END  &kp PG_DN  &kp DOWN  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+            >;
+        };
 
-	};
+        blank {
+            // Just so you have access to layer 3
+
+            bindings = <
+ &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+            >;
+        };
+
+        lighting {
+            bindings = <
+ &rgb_ug RGB_TOG  &rgb_ug RGB_EFR  &rgb_ug RGB_EFF  &rgb_ug RGB_HUD  &rgb_ug RGB_HUI  &trans  &trans  &trans  &trans  &trans  &trans  &rgb_ug RGB_BRD  &rgb_ug RGB_BRI  &trans  &bootloader  &trans  &trans  &trans  &rgb_ug RGB_SAD  &rgb_ug RGB_SAI  &trans  &trans  &trans  &trans  &trans  &trans  &rgb_ug RGB_SPD  &rgb_ug RGB_SPI  &trans  &bt BT_CLR  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &out OUT_TOG  &out OUT_USB  &out OUT_BLE  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+            >;
+        };
+    };
 };
