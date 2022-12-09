@@ -1,4 +1,4 @@
-on: [push, pull_request, create, workflow_dispatch]
+on: [push, pull_request, workflow_dispatch]
 
 name: Build
 
@@ -22,30 +22,26 @@ jobs:
             zephyr/
             bootloader/
             zmk/
-          key: ${{ runner.os }}-build-v2-${{ env.cache-name }}-${{ hashFiles('manifest-dir/west.yml') }}
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('manifest-dir/west.yml') }}
           restore-keys: |
             ${{ runner.os }}-build-${{ env.cache-name }}-
             ${{ runner.os }}-build-
             ${{ runner.os }}-
-      - name: Initialize workspace (west init)
+      - name: West Init
         run: west init -l config
-      - name: Update modules (west update)
+      - name: West Update
         run: west update
-      - name: Export zephyr CMake package (west zephyr-export)
+      - name: West Zephyr export
         run: west zephyr-export
-      - name: List modules (west list)
-        run: west list
-      - name: Copy keymap to folder
-        run: cp ${GITHUB_WORKSPACE}/config/kawa.keymap ${GITHUB_WORKSPACE}/config/boards/arm/kawa/kawa.keymap
-      - name: Build Kawa (west build)
+      - name: West Build (Kawa)
         run: west build -s zmk/app -b kawa -- -DZMK_CONFIG="${GITHUB_WORKSPACE}/config"
-      - name: Kawa .config
-        if: ${{ always() }}
-        run: cat -n build/zephyr/.config
+      - name: Kawa Kconfig file
+        run: cat build/zephyr/.config | grep -v "^#" | grep -v "^$"
       - name: Rename zmk.uf2
-        run: cp build/zephyr/zmk.uf2 kawa-firmware.uf2
-      - name: Archive
+        run: cp build/zephyr/zmk.uf2 kawa.uf2
+      - name: Archive (Kawa)
         uses: actions/upload-artifact@v2
         with:
-          name: firmware
-          path: '*.uf2'
+          name: kawa
+          path: "*.uf2"
+          
