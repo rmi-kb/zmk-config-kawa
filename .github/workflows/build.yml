@@ -42,6 +42,6 @@ jobs:
       - name: Archive (Kawa)
         uses: actions/upload-artifact@v2
         with:
-          name: kawa
+          name: kawa_no_rgb
           path: "*.uf2"
           
